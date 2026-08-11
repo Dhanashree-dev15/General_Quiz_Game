@@ -1,0 +1,186 @@
+
+[
+    
+  
+    {
+      "question_no":1,
+      "question": "What is the capital of India?",
+      "options": ["Mumbai", "New Delhi", "Kolkata", "Chennai"],
+      "answer": "New Delhi"
+    },
+    {
+        "question_no":2,
+      "question": "Which planet is known as the Red Planet?",
+      "options": ["Earth", "Mars", "Venus", "Jupiter"],
+      "answer": "Mars"
+    },
+    {
+        "question_no":3,
+      "question": "Who wrote the Indian National Anthem?",
+      "options": ["Rabindranath Tagore", "Mahatma Gandhi", "Bankim Chandra Chatterjee", "Sarojini Naidu"],
+      "answer": "Rabindranath Tagore"
+    },
+    {
+        "question_no":4,
+      "question": "Which is the largest ocean on Earth?",
+      "options": ["Atlantic Ocean", "Indian Ocean", "Pacific Ocean", "Arctic Ocean"],
+      "answer": "Pacific Ocean"
+    },
+    {
+        "question_no":5,
+      "question": "How many continents are there on Earth?",
+      "options": ["5", "6", "7", "8"],
+      "answer": "7"
+    },
+    {
+        "question_no":6,
+      "question": "Which is the longest river in the world?",
+      "options": ["Amazon", "Yangtze", "Nile", "Mississippi"],
+      "answer": "Nile"
+    },
+    {
+        "question_no":7,
+      "question": "Who invented the telephone?",
+      "options": ["Thomas Edison", "Alexander Graham Bell", "Nikola Tesla", "James Watt"],
+      "answer": "Alexander Graham Bell"
+    },
+    {
+        "question_no":8,
+      "question": "Which is the national animal of India?",
+      "options": ["Lion", "Tiger", "Elephant", "Leopard"],
+      "answer": "Tiger"
+    },
+    {
+        "question_no":9,
+      "question": "Which gas do plants absorb from the atmosphere?",
+      "options": ["Oxygen", "Nitrogen", "Carbon Dioxide", "Hydrogen"],
+      "answer": "Carbon Dioxide"
+    },
+    {
+        "question_no":10,
+      "question": "Which is the smallest planet in our Solar System?",
+      "options": ["Mercury", "Mars", "Venus", "Pluto"],
+      "answer": "Mercury"
+    },
+    {
+        "question_no":11,
+      "question": "Who is known as the Father of the Nation in India?",
+      "options": ["Jawaharlal Nehru", "Mahatma Gandhi", "Sardar Patel", "Subhas Chandra Bose"],
+      "answer": "Mahatma Gandhi"
+    },
+    {
+        "question_no":12,
+      "question": "Which is the largest mammal in the world?",
+      "options": ["Elephant", "Blue Whale", "Giraffe", "Hippopotamus"],
+      "answer": "Blue Whale"
+    },
+    {
+        "question_no":13,
+      "question": "How many players are there in a cricket team?",
+      "options": ["9", "10", "11", "12"],
+      "answer": "11"
+    },
+    {
+        "question_no":14,
+      "question": "Which country is known as the Land of the Rising Sun?",
+      "options": ["China", "Japan", "Thailand", "South Korea"],
+      "answer": "Japan"
+    },
+    {
+        "question_no":15,
+      "question": "What is the chemical symbol of Gold?",
+      "options": ["Go", "Ag", "Au", "Gd"],
+      "answer": "Au"
+    },
+    {
+        "question_no":16,
+      "question": "Which is the fastest land animal?",
+      "options": ["Lion", "Horse", "Cheetah", "Tiger"],
+      "answer": "Cheetah"
+    },
+    {
+        "question_no":17,
+      "question": "Who painted the Mona Lisa?",
+      "options": ["Pablo Picasso", "Leonardo da Vinci", "Vincent van Gogh", "Michelangelo"],
+      "answer": "Leonardo da Vinci"
+    },
+    {
+        "question_no":18,
+      "question": "Which is the largest desert in the world?",
+      "options": ["Sahara", "Arabian", "Gobi", "Kalahari"],
+      "answer": "Sahara"
+    },
+    {
+        "question_no":19,
+      "question": "Which is the hardest natural substance?",
+      "options": ["Gold", "Iron", "Diamond", "Silver"],
+      "answer": "Diamond"
+    },
+    {
+        "question_no":20,
+      "question": "Which blood group is known as the universal donor?",
+      "options": ["A+", "B+", "O-", "AB+"],
+      "answer": "O-"
+    },
+    {
+        "question_no":21,
+      "question": "Who was the first President of India?",
+      "options": ["Rajendra Prasad", "S. Radhakrishnan", "A. P. J. Abdul Kalam", "Zakir Husain"],
+      "answer": "Rajendra Prasad"
+    },
+    {
+        "question_no":22,
+      "question": "Which is the largest planet in our Solar System?",
+      "options": ["Saturn", "Earth", "Jupiter", "Neptune"],
+      "answer": "Jupiter"
+    },
+    {
+        "question_no":23,
+      "question": "Which organ purifies blood in the human body?",
+      "options": ["Heart", "Liver", "Kidney", "Lungs"],
+      "answer": "Kidney"
+    },
+    {
+        "question_no":24,
+      "question": "How many colors are there in a rainbow?",
+      "options": ["5", "6", "7", "8"],
+      "answer": "7"
+    },
+    {
+        "question_no":25,
+      "question": "Which country hosted the 2016 Summer Olympics?",
+      "options": ["China", "Brazil", "Japan", "Russia"],
+      "answer": "Brazil"
+    },
+    {
+        "question_no":26,
+      "question": "What is the boiling point of water at sea level?",
+      "options": ["90°C", "95°C", "100°C", "105°C"],
+      "answer": "100°C"
+    },
+    {
+        "question_no":27,
+      "question": "Which vitamin is mainly obtained from sunlight?",
+      "options": ["Vitamin A", "Vitamin B12", "Vitamin C", "Vitamin D"],
+      "answer": "Vitamin D"
+    },
+    {
+        "question_no":28,
+      "question": "Which is the tallest mountain in the world?",
+      "options": ["K2", "Kangchenjunga", "Mount Everest", "Makalu"],
+      "answer": "Mount Everest"
+    },
+    {
+        "question_no":29,
+      "question": "Which festival is known as the Festival of Lights in India?",
+      "options": ["Holi", "Diwali", "Eid", "Christmas"],
+      "answer": "Diwali"
+    },
+    {
+        "question_no":30,
+      "question": "Which instrument measures atmospheric pressure?",
+      "options": ["Thermometer", "Barometer", "Hygrometer", "Anemometer"],
+      "answer": "Barometer"
+    }
+  ]
+
