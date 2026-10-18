@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Smart Quiz Game</title>
+    <style>
+        :root {
+            color-scheme: dark;
+            --bg: #0b1020;
+            --card: #151d32;
+            --line: #293550;
+            --muted: #9aa8c2;
+            --text: #f4f7ff;
+            --accent: #8b7cff;
+            --good: #52d6a2;
+            --bad: #ff758f
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: radial-gradient(ellipse at 15% 0, #222757 0, transparent 42%), var(--bg);
+            color: var(--text);
+            font: 16px/1.5 system-ui, -apple-system, Segoe UI, sans-serif;
+            display: grid;
+            place-items: center;
+            padding: 24px
+        }
+
+        main {
+            width: min(720px, 100%)
+        }
+
+        .brand {
+            margin: 0 0 18px;
+            text-align: center;
+            color: #c3c8ff;
+            font-size: .85rem;
+            font-weight: 800;
+            letter-spacing: .18em;
+            text-transform: uppercase
+        }
+
+        .card {
+            background: rgba(21, 29, 50, .96);
+            border: 1px solid var(--line);
+            border-radius: 24px;
+            padding: clamp(22px, 5vw, 42px);
+            box-shadow: 0 24px 80px #0006
+        }
+
+        h1,
+        h2,
+        p {
+            margin-top: 0
+        }
+
+        h1 {
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            line-height: 1.15;
+            margin-bottom: 10px
+        }
+
+        h2 {
+            font-size: 1.3rem
+        }
+
+        .muted {
+            color: var(--muted)
+        }
+
+        label {
+            display: block;
+            margin: 20px 0 7px;
+            font-weight: 650
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 13px 14px;
+            border-radius: 12px;
+            border: 1px solid var(--line);
+            background: #0e1528;
+            color: var(--text);
+            font: inherit
+        }
+
+        button {
+            font: inherit;
+            cursor: pointer
+        }
+
+        .primary {
+            width: 100%;
+            margin-top: 24px;
+            padding: 14px 18px;
+            border: 0;
+            border-radius: 12px;
+            background: linear-gradient(110deg, #8071ff, #a261e8);
+            color: white;
+            font-weight: 800
+        }
+
+        .primary:disabled {
+            opacity: .55;
+            cursor: wait
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px
+        }
+
+        .grid label {
+            margin-top: 16px
+        }
+
+        .error {
+            color: #ff9cae;
+            margin-top: 14px
+        }
+
+        .topline {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+            margin-bottom: 18px
+        }
+
+        .pill {
+            display: inline-flex;
+            align-items: center;
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            padding: 6px 11px;
+            color: #c8d0e5;
+            font-size: .86rem
+        }
+
+        .timer {
+            font-variant-numeric: tabular-nums;
+            font-weight: 800;
+            color: #d1caff
+        }
+
+        .timer.low {
+            color: var(--bad)
+        }
+
+        .progress {
+            height: 7px;
+            border-radius: 10px;
+            background: #0e1528;
+            margin: 0 0 28px;
+            overflow: hidden
+        }
+
+        .progress span {
+            display: block;
+            height: 100%;
+            background: var(--accent);
+            transition: width .25s
+        }
+
+        .question {
+            font-size: clamp(1.2rem, 3.2vw, 1.55rem);
+            line-height: 1.35;
+            margin-bottom: 22px
+        }
+
+        .answers {
+            display: grid;
+            gap: 11px
+        }
+
+        .answer {
+            display: flex;
+            gap: 13px;
+            align-items: center;
+            text-align: left;
+            width: 100%;
+            padding: 14px;
+            border: 1px solid var(--line);
+            border-radius: 13px;
+            background: #10182c;
+            color: var(--text)
+        }
+
+        .answer:hover:not(:disabled) {
+            border-color: #8b7cff;
+            background: #191f3d
+        }
+
+        .answer.selected {
+            border-color: var(--accent);
+            background: #242146
+        }
+
+        .answer.correct {
+            border-color: var(--good);
+            background: #12372f
+        }
+
+        .answer.wrong {
+            border-color: var(--bad);
+            background: #3a202d
+        }
+
+        .letter {
+            display: grid;
+            place-items: center;
+            flex: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 9px;
+            background: #252e49;
+            color: #c8d0e5;
+            font-weight: 800
+        }
+
+        .answer:disabled {
+            cursor: default
+        }
+
+        .actions {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            margin-top: 20px
+        }
+
+        .actions .primary {
+            width: auto;
+            min-width: 150px;
+            margin: 0
+        }
+
+        .secondary {
+            padding: 11px 15px;
+            border-radius: 12px;
+            border: 1px solid var(--line);
+            background: #10182c;
+            color: var(--text)
+        }
+
+        .secondary:disabled {
+            opacity: .45;
+            cursor: not-allowed
+        }
+
+        .result {
+            text-align: center
+        }
+
+        .score {
+            font-size: 3rem;
+            font-weight: 900;
+            color: #c3baff;
+            margin: 8px 0
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin: 24px 0
+        }
+
+        .stat {
+            padding: 14px 8px;
+            border-radius: 14px;
+            background: #0e1528
+        }
+
+        .stat b {
+            display: block;
+            font-size: 1.35rem
+        }
+
+        .stat span {
+            font-size: .86rem;
+            color: var(--muted)
+        }
+
+        .hidden {
+            display: none !important
+        }
+
+        @media(max-width:560px) {
+            body {
+                padding: 14px
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+                gap: 0
+            }
+
+            .topline {
+                align-items: flex-start
+            }
+
+            .actions {
+                flex-direction: column-reverse
+            }
+
+            .actions button {
+                width: 100% !important
+            }
+
+            .stats {
+                gap: 6px
+            }
+
+            .stat {
+                padding: 12px 4px
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <p class="brand">✦ Smart Quiz Game</p>
+        <section class="card" id="setup">
+            <h1>Ready to play?</h1>
+            <p class="muted">Choose your quiz settings. You’ll have 15 seconds for each question.</p>
+            <form id="setupForm">
+                <label for="player">Your name</label><input id="player" name="player" maxlength="40"
+                    placeholder="Enter your name" autocomplete="name" required>
+                <div class="grid">
+                    <div><label for="subject">Subject</label><select id="subject">
+                            <option value="9">General Knowledge</option>
+                            <option value="18">Computers</option>
+                            <option value="17">Science</option>
+                            <option value="19">Mathematics</option>
+                            <option value="21">Sports</option>
+                            <option value="11">Entertainment</option>
+                        </select></div>
+                    <div><label for="difficulty">Difficulty</label><select id="difficulty">
+                            <option value="easy">Easy</option>
+                            <option value="medium">Medium</option>
+                            <option value="hard">Hard</option>
+                        </select></div>
+                    <div><label for="amount">Questions</label><select id="amount">
+                            <option value="5">5 questions</option>
+                            <option value="10">10 questions</option>
+                            <option value="15">15 questions</option>
+                        </select></div>
+                </div>
+                <button class="primary" id="startBtn">Start quiz <span aria-hidden="true">→</span></button>
+                <p class="error hidden" id="setupError" role="alert"></p>
+            </form>
+        </section>
+        <section class="card hidden" id="quiz" aria-live="polite">
+            <div class="topline"><span class="pill" id="questionCount"></span><span class="pill"
+                    id="difficultyBadge"></span><span class="timer" id="timer">00:15</span></div>
+            <div class="progress"><span id="progressBar"></span></div>
+            <h2 class="question" id="question"></h2>
+            <div class="answers" id="answers"></div>
+            <div class="actions"><button class="secondary" id="hintBtn">✦ 50:50 hint</button><button class="primary"
+                    id="nextBtn" disabled>Submit answer</button></div>
+            <p class="muted" id="feedback" aria-live="polite"></p>
+        </section>
+        <section class="card hidden result" id="results"></section>
+    </main>
+    <script>
+        const API = 'https://opentdb.com/api.php';
+        const byId = id => document.getElementById(id);
+        const state = { questions: [], index: 0, selected: null, score: 0, correct: 0, wrong: 0, timedOut: 0, points: 1, seconds: 15, timer: null, locked: false, hintUsed: false, name: '', subject: '', difficulty: '' };
+        const decode = value => { const t = document.createElement('textarea'); t.innerHTML = value; return t.value };
+        function shuffle(items) { for (let i = items.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1));[items[i], items[j]] = [items[j], items[i]] } return items }
+        function esc(value) { return String(value).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])) }
+        function showError(message) { const node = byId('setupError'); node.textContent = message; node.classList.remove('hidden') }
+        byId('setupForm').addEventListener('submit', async event => {
+            event.preventDefault(); byId('setupError').classList.add('hidden'); const btn = byId('startBtn'); btn.disabled = true; btn.textContent = 'Loading questions…';
+            state.name = byId('player').value.trim(); state.subject = byId('subject').selectedOptions[0].text; state.difficulty = byId('difficulty').value; state.points = { easy: 1, medium: 2, hard: 3 }[state.difficulty];
+            try { const params = new URLSearchParams({ amount: byId('amount').value, category: byId('subject').value, difficulty: state.difficulty, type: 'multiple' }); const response = await fetch(`${API}?${params}`); if (!response.ok) throw new Error('The quiz service returned an error.'); const data = await response.json(); if (data.response_code !== 0 || !data.results?.length) throw new Error('Questions could not be loaded for these settings. Please try another selection.'); state.questions = data.results.map(q => { const answer = decode(q.correct_answer); return { question: decode(q.question), correct: answer, options: shuffle([...q.incorrect_answers.map(decode), answer]) } }); state.index = 0; state.score = state.correct = state.wrong = state.timedOut = 0; byId('setup').classList.add('hidden'); byId('results').classList.add('hidden'); byId('quiz').classList.remove('hidden'); renderQuestion() } catch (error) { showError(error.message + ' Check your internet connection and try again.') } finally { btn.disabled = false; btn.innerHTML = 'Start quiz <span aria-hidden="true">→</span>' }
+        });
+        function renderQuestion() { clearInterval(state.timer); state.selected = null; state.locked = false; state.hintUsed = false; const q = state.questions[state.index]; byId('questionCount').textContent = `Question ${state.index + 1} / ${state.questions.length}`; byId('difficultyBadge').textContent = state.difficulty[0].toUpperCase() + state.difficulty.slice(1); byId('progressBar').style.width = `${state.index / state.questions.length * 100}%`; byId('question').textContent = q.question; byId('feedback').textContent = ''; byId('hintBtn').disabled = false; byId('hintBtn').classList.remove('hidden'); byId('nextBtn').textContent = 'Submit answer'; byId('nextBtn').disabled = true; byId('answers').innerHTML = ''; q.options.forEach((option, i) => { const button = document.createElement('button'); button.type = 'button'; button.className = 'answer'; button.dataset.index = i; button.innerHTML = `<span class="letter">${String.fromCharCode(65 + i)}</span><span>${esc(option)}</span>`; button.addEventListener('click', () => selectAnswer(i)); byId('answers').append(button) }); state.seconds = 15; updateTimer(); state.timer = setInterval(() => { state.seconds--; updateTimer(); if (state.seconds <= 0) finishQuestion(true) }, 1000) }
+        function updateTimer() { byId('timer').textContent = `00:${String(state.seconds).padStart(2, '0')}`; byId('timer').classList.toggle('low', state.seconds <= 5) }
+        function selectAnswer(i) { if (state.locked) return; state.selected = i; document.querySelectorAll('.answer').forEach(button => button.classList.toggle('selected', Number(button.dataset.index) === i)); byId('nextBtn').textContent = state.index === state.questions.length - 1 ? 'Finish quiz' : 'Submit answer'; byId('nextBtn').disabled = false }
+        byId('hintBtn').addEventListener('click', () => { if (state.hintUsed || state.locked) return; state.hintUsed = true; const q = state.questions[state.index]; const wrong = q.options.map((v, i) => v !== q.correct ? i : -1).filter(i => i >= 0); shuffle(wrong).slice(0, 2).forEach(i => { const button = document.querySelector(`.answer[data-index="${i}"]`); if (button) { button.disabled = true; button.classList.add('hidden') } }); byId('hintBtn').disabled = true });
+        byId('nextBtn').addEventListener('click', () => { if (state.locked) { state.index++; if (state.index >= state.questions.length) showResults(); else renderQuestion(); return } if (state.selected === null) return; finishQuestion(false) });
+        function finishQuestion(timeout) { if (state.locked) return; state.locked = true; clearInterval(state.timer); const q = state.questions[state.index]; document.querySelectorAll('.answer').forEach(button => { button.disabled = true; const i = Number(button.dataset.index); if (q.options[i] === q.correct) button.classList.add('correct'); else if (i === state.selected) button.classList.add('wrong') }); if (timeout) { state.timedOut++; state.wrong++; byId('feedback').textContent = `Time’s up. The answer was ${q.correct}.` } else if (q.options[state.selected] === q.correct) { state.correct++; state.score += state.points; byId('feedback').textContent = `Correct! +${state.points} point${state.points === 1 ? '' : 's'}.` } else { state.wrong++; byId('feedback').textContent = `Not quite. The answer was ${q.correct}.` } byId('hintBtn').classList.add('hidden'); byId('nextBtn').disabled = false; byId('nextBtn').textContent = state.index === state.questions.length - 1 ? 'See results' : 'Next question' }
+        function showResults() { clearInterval(state.timer); byId('quiz').classList.add('hidden'); const total = state.questions.length, pct = Math.round(state.correct / total * 10000) / 100; const grade = pct >= 90 ? 'A+' : pct >= 75 ? 'A' : pct >= 60 ? 'B' : pct >= 40 ? 'C' : 'F'; const message = pct >= 90 ? 'Outstanding!' : pct >= 75 ? 'Excellent!' : pct >= 60 ? 'Good work!' : pct >= 40 ? 'Average — keep practicing.' : 'Keep practicing and try again.'; const box = byId('results'); box.innerHTML = `<p class="brand">Quiz complete</p><h1>Well played, ${esc(state.name)}!</h1><p class="muted">${esc(state.subject)} · ${esc(state.difficulty[0].toUpperCase() + state.difficulty.slice(1))}</p><div class="score">${state.score}<span class="muted" style="font-size:1rem"> points</span></div><p>${message}</p><div class="stats"><div class="stat"><b>${state.correct}</b><span>Correct</span></div><div class="stat"><b>${state.wrong}</b><span>Wrong</span></div><div class="stat"><b>${state.timedOut}</b><span>Timed out</span></div></div><p><strong>${pct.toFixed(2)}%</strong> · Grade <strong>${grade}</strong></p><button class="primary" id="playAgain">Play again</button>`; box.classList.remove('hidden'); byId('progressBar').style.width = '100%'; byId('playAgain').addEventListener('click', () => { box.classList.add('hidden'); byId('setup').classList.remove('hidden') }) }
+    </script>
+</body>
+
+</html>
